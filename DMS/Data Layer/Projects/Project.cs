@@ -11,11 +11,12 @@ namespace DataLayer.Projects
         private string fileNumber;
         private string draftor;
         private string invoiceNumber;
-        private Docket.Docket docket;
+        private DLDocket.Docket docket;
 
         protected Project(string docketNumber, string inventorId, string typeOfApp)
         {
 
         }
+
     }
 }

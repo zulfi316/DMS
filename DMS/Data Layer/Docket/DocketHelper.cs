@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer.Docket
+namespace DataLayer.DLDocket
 {
     public class DLDocketHelper
     {

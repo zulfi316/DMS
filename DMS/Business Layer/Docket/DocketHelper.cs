@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.Docket
+namespace BusinessLayer.BLDocket
 {
-    public class BLDocketHelper : DataLayer.Docket.DLDocketHelper
+    public class BLDocketHelper : DataLayer.DLDocket.DLDocketHelper
     {
 
         private static BLDocketHelper helper;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer.Docket
+namespace DataLayer.DLDocket
 {
     public class Docket
     {
@@ -17,6 +17,29 @@ namespace DataLayer.Docket
             this.typeOfApp = typeOfApp;
         }
 
+        public String Id
+        {
+            get
+            {
+                return this.id;
+            }
+        }
+
+        public String InventorName
+        {
+            get
+            {
+                return this.inventorName;
+            }
+        }
+
+        public String TypeOfApp
+        {
+            get
+            {
+                return this.typeOfApp;
+            }
+        }
        
     }
 }

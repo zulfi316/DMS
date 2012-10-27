@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using UI.Session;
 
 namespace UI
 {
@@ -14,6 +15,15 @@ namespace UI
 
             if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password))
                 return;
+
+            string[] userInfo = BusinessLayer.BLUser.BLUserHelper.Instance.GetUserInfoByUserName(userName, password);
+
+            if (userInfo == null)
+                return;
+
+            UIUser.User user = new UIUser.User(userInfo[0], userInfo[1]);
+
+            SessionHelper.Instance.InitSession(user);
 
             Response.Redirect("/Main.aspx");
         }

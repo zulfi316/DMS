@@ -36,6 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserHelper.cs" />
     <Compile Include="Docket\Docket.cs" />
     <Compile Include="Docket\DocketHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
