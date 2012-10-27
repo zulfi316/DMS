@@ -9,7 +9,7 @@
     <h1>
         Welcome to the docket management system</h1>
     <hr />
-    <div id="abhi">
+    <div>
         <form runat="server">
         <table>
             <tr>
