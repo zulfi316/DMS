@@ -7,6 +7,7 @@ namespace UI.Session
     public class SessionData
     {
         private UIUser.User userInfo;
+        private UIDocket.Docket[] dockets;
 
         public UIUser.User UserInfo
         {
@@ -18,6 +19,26 @@ namespace UI.Session
             get
             {
                 return this.userInfo;
+            }
+        }
+
+        public UIDocket.Docket[] Dockets
+        {
+            set
+            {
+                this.dockets = value;
+            }
+            get
+            {
+                return this.dockets;
+            }
+        }
+
+        public UIDocket.Docket CurrentDocket
+        {
+            get
+            {
+                return this.dockets[0];
             }
         }
     }

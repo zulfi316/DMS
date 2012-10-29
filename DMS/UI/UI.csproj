@@ -44,8 +44,9 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Docket\Main.aspx" />
+    <Content Include="Docket\DocketMain.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="Scripts\DCMMain.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
@@ -60,12 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Docket\Docket.cs" />
-    <Compile Include="Docket\Main.aspx.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
+    <Compile Include="Docket\DocketMain.aspx.cs">
+      <DependentUpon>DocketMain.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Docket\Main.aspx.designer.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
+    <Compile Include="Docket\DocketMain.aspx.designer.cs">
+      <DependentUpon>DocketMain.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.aspx.cs">
       <DependentUpon>Main.aspx</DependentUpon>
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Project\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business Layer\Business Layer.csproj">

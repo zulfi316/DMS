@@ -13,6 +13,14 @@ namespace UI.Session
 
         private const string SESSION_ID_TOKEN = "DMS.UId";
 
+        private SessionData sessionData
+        {
+            get
+            {
+                return sessionInfo[(string)HttpContext.Current.Session[SESSION_ID_TOKEN]];
+            }
+        }
+
         private SessionHelper()
         {
 
@@ -50,7 +58,24 @@ namespace UI.Session
 
         public string GetUserId()
         {
-            return (sessionInfo[(string)HttpContext.Current.Session[SESSION_ID_TOKEN]]).UserInfo.Id;
+            return sessionData.UserInfo.Id;
+        }
+
+        public bool SetDockets(UIDocket.Docket[] dockets)
+        {
+            sessionData.Dockets = dockets;
+            return true;
+        }
+
+        public bool SetSelectedDocket(UIDocket.Docket docket)
+        {
+            UIDocket.Docket[] selectedDocketList = new UIDocket.Docket[1];
+            selectedDocketList[0] = docket;
+
+            UIDocket.Docket[] dockets = selectedDocketList;
+
+            return true;
+
         }
     }
 }

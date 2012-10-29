@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using UI.Session;
+using BusinessLayer.BLUser;
 
 namespace UI
 {
@@ -16,7 +17,7 @@ namespace UI
             if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password))
                 return;
 
-            string[] userInfo = BusinessLayer.BLUser.BLUserHelper.Instance.GetUserInfoByUserName(userName, password);
+            string[] userInfo = BLUserHelper.Instance.GetUserInfoByUserName(userName, password);
 
             if (userInfo == null)
                 return;

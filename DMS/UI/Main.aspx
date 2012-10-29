@@ -4,28 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/DCMMain.js" type="text/javascript"></script>
     <title>Docket Management System</title>
-
     <script type="text/javascript" language="javascript">
 
-        function Init(userStartPage) {
-
-            $.ajax({
-                type: "POST",
-                url: userStartPage,
-                data: "",
-                dataType: "html",
-                success: function (result) {
-
-                    //$(#"DCM.MainDiv").html(result);
-                    document.getElementById("DCM.MainDiv").innerHTML = result;
-                },
-                error: function () {
-
-                    alert("Oopsies happened!");
-                }
-            });
-        }
+        //  Make the global JS class here
+        dcmMain = new DCMMain();
+        
 
     </script>
 </head>
@@ -41,10 +26,13 @@
             Welcome to the docket management system
         </h3>
     </div>
-    <div id="DCM.MainDiv" style="width: 100%; height: 70%; text-align: center">
-       <script type="text/javascript">
-           Init("/Docket/Main.aspx");
-       </script>
+    <div id="DCM.Breadcrumb" style="width: 100%; height: 10%; text-align: center">
+        <span onclick="dcmMain.docket.Init()" style="cursor: pointer">Docket</span>
+    </div>
+    <div id="DCM.MainDiv" style="width: 100%; height: 60%; text-align: center">
+        <script type="text/javascript">
+            dcmMain.Init("Docket");
+        </script>
     </div>
 </body>
 </html>
