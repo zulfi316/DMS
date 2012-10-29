@@ -46,6 +46,7 @@
   <ItemGroup>
     <Content Include="Docket\DocketMain.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="Project\ProjectMain.aspx" />
     <Content Include="Scripts\DCMMain.js" />
     <Content Include="SignIn.aspx" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -75,6 +76,14 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Project\Project.cs" />
+    <Compile Include="Project\ProjectMain.aspx.cs">
+      <DependentUpon>ProjectMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\ProjectMain.aspx.designer.cs">
+      <DependentUpon>ProjectMain.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Session\SessionData.cs" />
     <Compile Include="Session\SessionHelper.cs" />
     <Compile Include="SignIn.aspx.cs">
@@ -89,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Project\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business Layer\Business Layer.csproj">

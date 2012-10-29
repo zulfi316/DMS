@@ -32,7 +32,6 @@
 
         Docket.prototype.Init = function () {
             $.ajax({
-                type: "POST",
                 url: "/Docket/DocketMain.aspx",
                 success: function (result) {
                     dcmMain.UpdateMainStage(result);
@@ -48,8 +47,20 @@
     function Project() {
 
         Project.prototype.Init = function (docketId) {
-            // Get all projects for the selected Docket
-            alert('Time Get projects for docketId: ' + docketId);
+
+            var data = 'DocketId=' + docketId;
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                url: "/Project/ProjectMain.aspx",
+                success: function (result) {
+                    dcmMain.UpdateMainStage(result);
+                },
+                error: function () {
+                    dcmMain.HandleError("Failed to get projects!");
+                }
+            });
         }
 
 

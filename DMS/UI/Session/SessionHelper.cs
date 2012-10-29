@@ -61,6 +61,11 @@ namespace UI.Session
             return sessionData.UserInfo.Id;
         }
 
+        public UIDocket.Docket[] GetDockets()
+        {
+            return sessionData.Dockets;
+        }
+
         public bool SetDockets(UIDocket.Docket[] dockets)
         {
             sessionData.Dockets = dockets;

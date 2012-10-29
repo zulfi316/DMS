@@ -36,6 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Project\ProjectHelper.cs" />
+    <Compile Include="Project\Project.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserHelper.cs" />
     <Compile Include="Docket\Docket.cs" />
