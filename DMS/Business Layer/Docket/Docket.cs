@@ -6,32 +6,16 @@ namespace BusinessLayer.BLDocket
 {
     public class Docket : DataLayer.DLDocket.Docket
     {
-
-        public Docket()
+        protected Docket(int id, string number, string inventionName, string inventorId, string typeOfApp)
+            : base(id, number, inventionName, inventorId, typeOfApp)
         {
 
         }
-        protected Docket(string docketNumber, string inventorId, string typeOfApp) : base(docketNumber, inventorId, typeOfApp)
-        {
-            
-        }
 
-        protected bool save()
+        protected bool Save()
         {
-            
-            
             //do the validation and the checks that need to be done here and call saveDocket function from base class
-            return base.save();
+            return base.Save();
         }
-
-        protected string newDocketId()
-        {
-            //global variable which will hold current docket number. we will use this to get the new docket number here
-            string newDocketNo = "";
-            return newDocketNo;
-        }
-        
-
-
     }
 }

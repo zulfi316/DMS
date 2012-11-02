@@ -2,44 +2,77 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using DataLayer.Properties;
+using DataLayer.connection;
+using System.Data.SqlClient;
+using System.Xml;
 
 namespace DataLayer.DLDocket
 {
     public class DLDocketHelper
     {
 
+        private int docketNumber;
+
+        private DBConnection dbManager;
+
+        public String DocketNumber
+        {
+            get
+            {
+                docketNumber = GetNextDocketNumber();
+                return Settings.Default.DocketNumberFormat.Replace("%YY%", DateTime.Now.ToString("yy")) +
+                            Settings.Default.DocketNumberSeperator +
+                                docketNumber.ToString("D" + Settings.Default.DocketNumberPadding);
+            }
+        }
+
+        private int GetNextDocketNumber()
+        {
+            // zero means unassigned
+            if (docketNumber == 0)
+                docketNumber = GetLastDocketNumberFromDB();
+
+            return ++docketNumber;
+        }
+
+        private int GetLastDocketNumberFromDB()
+        {
+            // if return from DB is null then set it to 1 (nothing in DB yet)
+            return 0;
+        }
+
+
         protected DLDocketHelper()
         {
 
         }
 
-        protected List<string[]> GetDocketsForUserId(string userId)
+        protected string GetDocketsForUserIdInXML(string userId)
         {
-            string[] individualDocketInfo = new string[3];
-            List<string[]> docketInfo = new List<string[]>();
+            dbManager = new DBConnection();
 
-            individualDocketInfo[0] = "001";
-            individualDocketInfo[1] = "AMK";
-            individualDocketInfo[2] = "Crap";
+            try
+            {
+                SqlCommand command = new SqlCommand();
 
-            docketInfo.Add(individualDocketInfo);
+                command.Connection = dbManager.Connection;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "[dbo].[get_dockets_for_user]";
 
-            individualDocketInfo = new string[3];
-            individualDocketInfo[0] = "002";
-            individualDocketInfo[1] = "ZT";
-            individualDocketInfo[2] = "Superb";
+                command.Parameters.AddWithValue("@user_id", userId);
 
-            docketInfo.Add(individualDocketInfo);
+                XmlReader reader = command.ExecuteXmlReader();
 
-            individualDocketInfo = new string[3];
-            individualDocketInfo[0] = "003";
-            individualDocketInfo[1] = "GT";
-            individualDocketInfo[2] = "Pirate";
+                DataSet ds = new DataSet();
+                ds.ReadXml(reader);
 
-            docketInfo.Add(individualDocketInfo);
-
-
-            return docketInfo;
+                return ds.GetXml();
+            }
+            finally
+            {
+                dbManager.Close();
+            }
         }
 
         /// <summary>

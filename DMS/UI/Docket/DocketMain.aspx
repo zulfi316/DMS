@@ -15,10 +15,13 @@
 <h5>
     These are the dockets currently assigned to you:
 </h5>
+
+<button onclick="dmsMain.docket.ShowDocketCreation()">Create new docket!</button>
+
 <table border="1">
     <tr>
         <th>
-            Numer
+            Number
         </th>
         <th>
             Inventor
@@ -30,9 +33,9 @@
     <%
       foreach (UI.UIDocket.Docket docket in docketsForUser)
       {%>
-    <tr onclick="dcmMain.project.Init('<%=docket.Id%>')">
+    <tr onclick="dmsMain.project.Init('<%=docket.Id%>')">
         <td>
-            <%=docket.Id%>
+            <%=docket.Number%>
         </td>
         <td>
             <%=docket.InventorName%>

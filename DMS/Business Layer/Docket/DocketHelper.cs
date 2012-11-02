@@ -30,9 +30,9 @@ namespace BusinessLayer.BLDocket
         }
 
 
-        public new List<string[]> GetDocketsForUserId(string userId)
+        public new string GetDocketsForUserIdInXML(string userId)
         {
-            return base.GetDocketsForUserId(userId);
+            return base.GetDocketsForUserIdInXML(userId);
         }
 
         /// <summary>

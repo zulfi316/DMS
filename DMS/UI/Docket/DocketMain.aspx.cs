@@ -5,6 +5,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using UI.Session;
 using BusinessLayer.BLDocket;
+using System.Xml;
 
 namespace UI.Docket
 {
@@ -14,16 +15,30 @@ namespace UI.Docket
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            List<String[]> rawDocketInfo = BLDocketHelper.Instance.GetDocketsForUserId(SessionHelper.Instance.GetUserId());
+            string rawDocketInfo = BLDocketHelper.Instance.GetDocketsForUserIdInXML(SessionHelper.Instance.GetUserId());
 
-            if (rawDocketInfo == null || rawDocketInfo.Count == 0)
+            if (String.IsNullOrEmpty(rawDocketInfo) || rawDocketInfo.Trim().Equals(string.Empty))
                 return;
 
             docketsForUser = new List<UIDocket.Docket>();
 
-            foreach (string[] doceketInfo in rawDocketInfo)
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.LoadXml(rawDocketInfo);
+
+            XmlNodeList xList = xDoc.SelectNodes("//Dockets//Docket");
+
+            foreach (XmlNode xNode in xList)
             {
-                UIDocket.Docket docket = new UIDocket.Docket(doceketInfo[0], doceketInfo[1], doceketInfo[2]);
+                int id;
+                string number, inventionName, inventorName, typeOfApp;
+
+                id = Int32.Parse(xNode.SelectSingleNode("id").InnerText);
+                number = xNode.SelectSingleNode("number").InnerText;
+                inventionName = xNode.SelectSingleNode("invention_name").InnerText;
+                inventorName = xNode.SelectSingleNode("inventor_name").InnerText;
+                typeOfApp = xNode.SelectSingleNode("type_of_app").InnerText;
+
+                UIDocket.Docket docket = new UIDocket.Docket(id, number, inventionName, inventorName, typeOfApp);
                 docketsForUser.Add(docket);
             }
 

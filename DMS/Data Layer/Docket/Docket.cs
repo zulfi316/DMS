@@ -1,27 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DataLayer.connection;
+using System.Data.SqlClient;
 
 namespace DataLayer.DLDocket
 {
     public class Docket
     {
-        private string id;
+        private int id;
+        private string number;
         private string inventorName;
+        private string inventionName;
         private string typeOfApp;
 
-        public Docket()
-        {
+        private DBConnection dbManager;
 
-        }
-        protected Docket(string docketNumber, string inventorId, string typeOfApp)
+        protected Docket(int id, string docketNumber, string inventionName, string inventorId, string typeOfApp)
         {
-            this.id = docketNumber;
+            this.id = id;
+            this.number = docketNumber;
             this.inventorName = inventorId;
             this.typeOfApp = typeOfApp;
+            this.inventionName = inventionName;
         }
 
-        public String Id
+        public String InventionName
+        {
+            get
+            {
+                return this.inventionName;
+            }
+        }
+
+        public Int32 Id
         {
             get
             {
@@ -30,6 +42,18 @@ namespace DataLayer.DLDocket
             set
             {
                 this.id = value;
+            }
+        }
+
+        public String Number
+        {
+            get
+            {
+                return this.number;
+            }
+            set
+            {
+                this.number = value;
             }
         }
 
@@ -54,22 +78,48 @@ namespace DataLayer.DLDocket
             }
             set
             {
-              this.typeOfApp=value;
+                this.typeOfApp = value;
             }
         }
 
-        protected bool save()
+        protected bool Save()
         {
-            //Inser the docket into docket table.
+
+            try
+            {
+                dbManager = new DBConnection();
+                dbManager.Open();
+
+                SqlConnection connection = dbManager.Connection;
+
+                SqlCommand command = new SqlCommand();
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.CommandText = "[dbo].[save_docket]";
+                command.Connection = connection;
+
+                command.Parameters.AddWithValue("@invention_name", dbManager.CheckNull(this.inventionName));
+                command.Parameters.AddWithValue("@inventor_name",  dbManager.CheckNull(this.inventorName));
+                command.Parameters.AddWithValue("@type_of_app",    dbManager.CheckNull(this.typeOfApp));
+                command.Parameters.AddWithValue("@number",         dbManager.CheckNull(this.number));
+
+                Int32 docketId = Convert.ToInt32(command.ExecuteScalar());
+
+                this.id = docketId;
+                return true;
+            }
+            finally
+            {
+                dbManager.Close();
+            }
+        }
+
+        protected bool Update()
+        {
             return false;
         }
 
-        protected bool update()
-        {
-            //
-            return false;
-        }
 
-       
     }
 }

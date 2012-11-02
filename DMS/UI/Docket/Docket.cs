@@ -6,31 +6,18 @@ namespace UI.UIDocket
 {
     public class Docket : BusinessLayer.BLDocket.Docket
     {
-        BusinessLayer.BLDocket.BLDocketHelper UIdocketHelp;
-        public Docket()
+        public Docket(int id, string number, string inventionName, string inventorId, string typeOfApp)
+            : base(id, number, inventionName, inventorId, typeOfApp)
         {
-                
-        }
-        public Docket(string docketNumber, string inventorId, string typeOfApp) : base(docketNumber, inventorId, typeOfApp)
-        {
-            
+
         }
 
-        public string createDocket()
+        public new String Save()
         {
-            string docketNumber = base.newDocketId();
-            return docketNumber;
-        }
-
-        public new bool save()
-        {
-            return base.save();
-            
-        }
-
-        public List<string[]> getDocketDetails(string docketNo)
-        {
-            return UIdocketHelp.getDocketDetail(docketNo);
+            if (base.Save())
+                return "yay!";
+            else
+                return "nain!";
         }
     }
 }
