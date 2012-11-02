@@ -34,5 +34,17 @@ namespace BusinessLayer.BLDocket
         {
             return base.GetDocketsForUserId(userId);
         }
+
+        /// <summary>
+        /// function to get single docket detail
+        /// </summary>
+        /// <param name="docketNo"></param>
+        /// <returns>return list of string as output</returns>
+        public new List<string[]> getDocketDetail(string docketNo)
+        {
+            return base.getDocketDetail(docketNo);
+        }
+
+
     }
 }

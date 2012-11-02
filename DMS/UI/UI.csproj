@@ -44,6 +44,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\DMSstyle.css" />
     <Content Include="Docket\DocketMain.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Project\ProjectMain.aspx" />

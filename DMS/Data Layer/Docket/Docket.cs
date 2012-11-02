@@ -10,6 +10,10 @@ namespace DataLayer.DLDocket
         private string inventorName;
         private string typeOfApp;
 
+        public Docket()
+        {
+
+        }
         protected Docket(string docketNumber, string inventorId, string typeOfApp)
         {
             this.id = docketNumber;
@@ -23,6 +27,10 @@ namespace DataLayer.DLDocket
             {
                 return this.id;
             }
+            set
+            {
+                this.id = value;
+            }
         }
 
         public String InventorName
@@ -31,6 +39,11 @@ namespace DataLayer.DLDocket
             {
                 return this.inventorName;
             }
+            set
+            {
+                this.inventorName = value;
+            }
+
         }
 
         public String TypeOfApp
@@ -39,7 +52,24 @@ namespace DataLayer.DLDocket
             {
                 return this.typeOfApp;
             }
+            set
+            {
+              this.typeOfApp=value;
+            }
         }
+
+        protected bool save()
+        {
+            //Inser the docket into docket table.
+            return false;
+        }
+
+        protected bool update()
+        {
+            //
+            return false;
+        }
+
        
     }
 }

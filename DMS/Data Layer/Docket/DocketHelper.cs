@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
 namespace DataLayer.DLDocket
 {
@@ -39,6 +40,20 @@ namespace DataLayer.DLDocket
 
 
             return docketInfo;
+        }
+
+        /// <summary>
+        /// Function to retrieve details of a given docket number
+        /// </summary>
+        /// <param name="docketno">Docekt number should be provided</param>
+        /// <returns>returns list of string containing the docket details</returns>
+        protected List<string[]> getDocketDetail(string docketno)
+        {
+            //get connection set up and then get details from the database
+
+            List<string[]> docketDetail = new List<string[]>();
+
+            return docketDetail;
         }
 
     }
