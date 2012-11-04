@@ -44,9 +44,9 @@ namespace DataLayer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-")]
-        public string DocketNumberSeperator {
+        public char DocketNumberSeperator {
             get {
-                return ((string)(this["DocketNumberSeperator"]));
+                return ((char)(this["DocketNumberSeperator"]));
             }
         }
         

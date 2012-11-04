@@ -8,7 +8,7 @@
     <Setting Name="DocketNumberFormat" Type="System.String" Scope="Application">
       <Value Profile="(Default)">INO%YY%</Value>
     </Setting>
-    <Setting Name="DocketNumberSeperator" Type="System.String" Scope="Application">
+    <Setting Name="DocketNumberSeperator" Type="System.Char" Scope="Application">
       <Value Profile="(Default)">-</Value>
     </Setting>
     <Setting Name="DocketNumberPadding" Type="System.String" Scope="Application">

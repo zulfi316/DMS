@@ -48,16 +48,21 @@ namespace DataLayer.connection
 
         public int Close()
         {
-            try
+            if (connection != null && connection.State != ConnectionState.Closed)
             {
-                connection.Close();
-                return 1;
-            }
-            catch (SqlException ex)
-            {
+                try
+                {
+                    connection.Close();
+                }
+                catch (SqlException ex)
+                {
 
-                return ex.ErrorCode;
+                    return ex.ErrorCode;
+                }
             }
+
+            return 1;
+
         }
 
         public object CheckNull(object input)

@@ -29,7 +29,11 @@
         alert(errorText);
     };
 
-/*****************************DOCKET which takes care of all the UI action for Dockets***********************************/
+    DMSMain.prototype.HandleSuccess = function (successText) {
+        alert(successText);
+    };
+
+    /*****************************DOCKET which takes care of all the UI action for Dockets***********************************/
     function Docket() {
 
         Docket.prototype.Init = function () {
@@ -55,12 +59,13 @@
                         {
                             Create: function () {
                                 dmsMain.docket.Save();
-                                $(this).dialog("close");
                             },
                             Close: function ()
                             { $(this).dialog("close"); }
                         },
                 modal: true,
+                width: 450,
+                height: 280,
                 title: 'Create docket!'
             });
 
@@ -68,6 +73,12 @@
                 '/Docket/CreateNew.aspx',
                 {},
                 function (responseText, textStatus, XMLHttpRequest) {
+
+                    var array = ['DMS-Docket-InventionName', 'DMS-Docket-InventorName', 'DMS-Docket-AppType'];
+
+                    for (i = 0; i < array.length; i++)
+                        $('#' + array[i]).tooltip({ disabled: true });
+
                     popupContainer.dialog("open");
                 }
             );
@@ -76,34 +87,64 @@
 
         Docket.prototype.Save = function () {
 
-            //if(this.Validate()){
+            if (this.Validate()) {
 
-            var data = {
-                actionKey:      "SaveDocket",
-                number:         $("#DMS-Docket-Number").val(),
-                inventionName:  $("#DMS-Docket-InventionName").val(),
-                inventorName:   $("#DMS-Docket-InventorName").val(),
-                appType:        $("#DMS-Docket-AppType").val()
-            };
+                var data = {
+                    actionKey: "SaveDocket",
+                    inventionName: $("#DMS-Docket-InventionName").val(),
+                    inventorName: $("#DMS-Docket-InventorName").val(),
+                    appType: $("#DMS-Docket-AppType").val()
+                };
 
-            $.ajax({
-                url: "/ActionFactory/Action.aspx",
-                metod: 'POST',
-                data: data,
-                success: function (result) {
-                    dmsMain.docket.Init();
-                },
-                error: function () {
-                    dmsMain.HandleError("Failed to get projects!");
+                $.ajax({
+                    url: "/ActionFactory/Action.aspx",
+                    metod: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (result) {
+
+                        if (result.success == "True") {
+                            dmsMain.HandleSuccess('Successfully made new docket with the id: ' + result.docketNumber);
+                            $('#DMS-popup').dialog("close");
+                            dmsMain.docket.Init();
+                        } else {
+                            dmsMain.HandleError(result.errorMessage);
+                        }
+                    },
+                    error: function (result) {
+                        dmsMain.HandleError(result.errorMessage);
+                    }
+                });
+            }
+        };
+
+        Docket.prototype.Validate = function () {
+
+            var array = ['#DMS-Docket-InventionName', '#DMS-Docket-InventorName', '#DMS-Docket-AppType'];
+
+            var success = true;
+
+            for (i = 0; i < array.length; i++) {
+
+                var element = $(array[i]);
+
+                if (element.val().trim() == '') {
+                    success = false;
+                    $(array[i]).addClass('ui-state-error style');
+                    $(array[i]).tooltip({ disabled: false });
+                } else {
+                    $(array[i]).removeClass('ui-state-error style');
+                    $(array[i]).tooltip({ disabled: true });
                 }
-            });
-            //}
-        }
+            }
+
+            return success;
+        };
     };
-/**********************************************END OF DOCKET FUNCTION********************************************************************/
+    /**********************************************END OF DOCKET FUNCTION********************************************************************/
 
 
-/*****************************PROJECT which takes care of all the UI action for projects***********************************/
+    /*****************************PROJECT which takes care of all the UI action for projects***********************************/
     function Project() {
 
         Project.prototype.Init = function (docketId) {
