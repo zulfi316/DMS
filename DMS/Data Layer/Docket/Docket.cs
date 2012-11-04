@@ -18,11 +18,11 @@ namespace DataLayer.DLDocket
 
         protected Docket(int id, string docketNumber, string inventionName, string inventorId, string typeOfApp)
         {
-            this.id = id;
-            this.number = docketNumber;
-            this.inventorName = inventorId;
-            this.typeOfApp = typeOfApp;
-            this.inventionName = inventionName;
+            this.Id = id;
+            this.Number = docketNumber;
+            this.InventorName = inventorId;
+            this.TypeOfApp = typeOfApp;
+            this.InventionName = inventionName;
         }
 
         public String InventionName
@@ -30,6 +30,10 @@ namespace DataLayer.DLDocket
             get
             {
                 return this.inventionName;
+            }
+            set
+            {
+                this.inventionName = value;
             }
         }
 
@@ -109,11 +113,21 @@ namespace DataLayer.DLDocket
                 this.id = docketId;
                 return true;
             }
+
+            catch (SqlException ex)
+            {
+               //Make an entry in the log. Return false;
+                return false;
+            }
+
             finally
             {
                 dbManager.Close();
-            }
+            } 
+
+            
         }
+
 
         protected bool Update()
         {

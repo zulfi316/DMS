@@ -40,7 +40,7 @@
                     dcmMain.HandleError("Failed to get projects!");
                 }
             });
-        }
+        };
     };
 
 

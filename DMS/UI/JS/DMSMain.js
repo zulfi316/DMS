@@ -29,6 +29,7 @@
         alert(errorText);
     };
 
+/*****************************DOCKET which takes care of all the UI action for Dockets***********************************/
     function Docket() {
 
         Docket.prototype.Init = function () {
@@ -99,8 +100,10 @@
             //}
         }
     };
+/**********************************************END OF DOCKET FUNCTION********************************************************************/
 
 
+/*****************************PROJECT which takes care of all the UI action for projects***********************************/
     function Project() {
 
         Project.prototype.Init = function (docketId) {
@@ -124,3 +127,5 @@
     }
 
 }
+
+/**********************************************END OF PROJECT FUNCTION********************************************************************/

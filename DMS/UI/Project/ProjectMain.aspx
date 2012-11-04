@@ -1,16 +1,16 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProjectMain.aspx.cs" Inherits="UI.Project.ProjectMain" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-    </form>
-</body>
-</html>
+<button class=".ui-button" style="float:right">Create new docket!</button>
+<div style=" position:absolute; top:10%; right:20%">
+    <table border="1">
+        <tr>
+            <th>PROJECT NUMBER</th>
+            <th>DOCKET NUMBER</th>
+            <th>TYPE OF PROJECT</th>
+            <th>COUNTRY</th>
+            <th>INVENTOR</th>
+            <th>INVOICE NUMBER</th>
+        </tr>
+    </table>
+</div>
+  
