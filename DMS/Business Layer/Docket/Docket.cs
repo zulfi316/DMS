@@ -6,8 +6,8 @@ namespace BusinessLayer.BLDocket
 {
     public class Docket : DataLayer.DLDocket.Docket
     {
-        protected Docket(int id, string number, string inventionName, string inventorId, string typeOfApp, DateTime createdOn)
-            : base(id, number, inventionName, inventorId, typeOfApp, createdOn)
+        protected Docket(int id, string number, string inventionName, string inventorId, string typeOfApp)
+            : base(id, number, inventionName, inventorId, typeOfApp)
         {
 
         }

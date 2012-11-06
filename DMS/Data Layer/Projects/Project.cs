@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using DataLayer.connection;
 
 namespace DataLayer.DLProject
 {
     public class Project
     {
+
         private DLDocket.Docket docket;
         private string type;
         private string id;
@@ -13,8 +17,16 @@ namespace DataLayer.DLProject
         private string draftor;
         private string invoiceNumber;
 
+        private DBConnection dbManager;
+
         protected Project(DLDocket.Docket docket, string type, string id, string fileNumber, string draftor, string invoiceNumber)
         {
+            this.Docket=docket;
+            this.Type=type;
+            this.Id=id;
+            this.FileNumber=fileNumber;
+            this.Draftor=draftor;
+            this.InvoiceNumber=invoiceNumber;
 
         }
 
@@ -24,6 +36,10 @@ namespace DataLayer.DLProject
             {
                 return this.docket;
             }
+            set
+            {
+                this.docket = value;
+            }
         }
 
         protected string Type
@@ -31,6 +47,10 @@ namespace DataLayer.DLProject
             get
             {
                 return this.type;
+            }
+            set
+            {
+                this.type = value;
             }
         }
 
@@ -40,6 +60,10 @@ namespace DataLayer.DLProject
             {
                 return this.id;
             }
+            set
+            {
+                this.id = value;
+            }
         }
 
         protected string FileNumber
@@ -48,6 +72,11 @@ namespace DataLayer.DLProject
             {
                 return this.fileNumber;
             }
+            set 
+            {
+                this.fileNumber = value;
+            }
+
         }
 
         protected string Draftor
@@ -56,6 +85,10 @@ namespace DataLayer.DLProject
             {
                 return this.draftor;
             }
+            set 
+            {
+                this.draftor = value;
+            }
         }
 
         protected string InvoiceNumber
@@ -63,6 +96,35 @@ namespace DataLayer.DLProject
             get
             {
                 return this.invoiceNumber;
+            }
+            set
+            {
+                this.invoiceNumber = value;
+            }
+        }
+
+
+        protected bool save()
+        {
+            try
+            {
+                dbManager = new DBConnection();
+                SqlConnection connection = dbManager.Connection;
+                SqlCommand command = new SqlCommand();
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.CommandText = "";
+                command.Connection = connection;
+
+                
+
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                //Enter 
+                return false;
             }
         }
     }

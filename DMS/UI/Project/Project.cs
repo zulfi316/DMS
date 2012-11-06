@@ -10,5 +10,10 @@ namespace UI.UIProject
         {
 
         }
+
+        public bool save()
+        {
+            return base.save();
+        }
     }
 }

@@ -48,7 +48,6 @@
     <Content Include="CSS\DMSstyle.css" />
     <Content Include="Docket\CreateNew.aspx" />
     <Content Include="Docket\DocketMain.aspx" />
-    <Content Include="Images\AddDocket.jpg" />
     <Content Include="JS\jquery-1.8.2.js" />
     <Content Include="JS\jquery-ui-1.9.1.custom.js" />
     <Content Include="JS\jquery-ui-1.9.1.custom.min.js" />

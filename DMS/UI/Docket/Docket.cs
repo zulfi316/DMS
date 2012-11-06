@@ -6,25 +6,18 @@ namespace UI.UIDocket
 {
     public class Docket : BusinessLayer.BLDocket.Docket
     {
-        public Docket(int id, string number, string inventionName, string inventorId, string typeOfApp, DateTime createdOn)
-            : base(id, number, inventionName, inventorId, typeOfApp, createdOn)
+        public Docket(int id, string number, string inventionName, string inventorId, string typeOfApp)
+            : base(id, number, inventionName, inventorId, typeOfApp)
         {
 
         }
 
-        public bool Save(out string errorText)
+        public new String Save()
         {
-            errorText = string.Empty;
-
-            try
-            {
-                return base.Save();
-            }
-            catch(Exception e)
-            {
-                errorText = e.Message + Environment.NewLine + e.StackTrace;
-                return false;
-            }
+            if (base.Save())
+                return "yay!";
+            else
+                return "nain!";
         }
     }
 }

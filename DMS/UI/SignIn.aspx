@@ -4,7 +4,7 @@
 <html>
 <head runat="server">
     <title>Docket Management System </title>
-    <link href="CSS/DMSstyle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/DMSstyle.css"/>
 </head>
 <body>
     <div style="width: 100%; height: 10%; background-color: #778899">
@@ -18,10 +18,11 @@
             Welcome to the docket management system
         </h3>
     </div>
+    
     <div style="width: 50%; height: 70%; float: left">
         &nbsp;
     </div>
-    <div class="rightpane" style="width: 50%; height: 70%; float: right">
+    <div class="rightpane"style="width: 50%; height: 70%; float: right">
         <form runat="server" method="post">
         <fieldset>
             <legend>Enter login details: </legend>Username:

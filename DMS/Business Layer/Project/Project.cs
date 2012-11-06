@@ -12,5 +12,10 @@ namespace BusinessLayer.BLProject
             
         }
 
+        protected bool save()
+        {
+            return false;
+        }
+
     }
 }

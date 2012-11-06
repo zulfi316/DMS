@@ -12,7 +12,36 @@ namespace DataLayer.DLDocket
     public class DLDocketHelper
     {
 
+        private int docketNumber;
+
         private DBConnection dbManager;
+
+        public String DocketNumber
+        {
+            get
+            {
+                docketNumber = GetNextDocketNumber();
+                return Settings.Default.DocketNumberFormat.Replace("%YY%", DateTime.Now.ToString("yy")) +
+                            Settings.Default.DocketNumberSeperator +
+                                docketNumber.ToString("D" + Settings.Default.DocketNumberPadding);
+            }
+        }
+
+        private int GetNextDocketNumber()
+        {
+            // zero means unassigned
+            if (docketNumber == 0)
+                docketNumber = GetLastDocketNumberFromDB();
+
+            return ++docketNumber;
+        }
+
+        private int GetLastDocketNumberFromDB()
+        {
+            // if return from DB is null then set it to 1 (nothing in DB yet)
+            return 0;
+        }
+
 
         protected DLDocketHelper()
         {

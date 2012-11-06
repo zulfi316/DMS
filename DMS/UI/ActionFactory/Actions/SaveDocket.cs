@@ -16,23 +16,9 @@ namespace UI.ActionFactory.Actions
 
         public string Execute()
         {
-            UIDocket.Docket newDocket = new UIDocket.Docket(Int32.MinValue,
-                                                            String.Empty, arguments["inventionName"],
-                                                            arguments["inventorName"],
-                                                            arguments["appType"],
-                                                            DateTime.MinValue);
+            UIDocket.Docket newDocket = new UIDocket.Docket(0, arguments["number"], arguments["inventionName"], arguments["inventorName"], arguments["appType"]);
 
-            string errorMessage;
-            return JSONifyOutput(newDocket.Save(out errorMessage), errorMessage, newDocket.Number);
-        }
-
-        private string JSONifyOutput(bool success, string errorText, string docketNumber)
-        {
-            return           "{ " +
-                                "\"success\": \"" + success.ToString() + "\", " +
-                                "\"errorMessage\": \"" + errorText.Replace("'", "\\'") + "\", " +
-                                "\"docketNumber\": \"" + docketNumber + "\"" +
-                             " }";
+            return newDocket.Save();
         }
     }
 }
