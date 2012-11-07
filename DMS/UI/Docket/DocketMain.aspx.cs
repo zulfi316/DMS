@@ -31,14 +31,16 @@ namespace UI.Docket
             {
                 int id;
                 string number, inventionName, inventorName, typeOfApp;
+                DateTime createdOn;
 
                 id = Int32.Parse(xNode.SelectSingleNode("id").InnerText);
                 number = xNode.SelectSingleNode("number").InnerText;
                 inventionName = xNode.SelectSingleNode("invention_name").InnerText;
                 inventorName = xNode.SelectSingleNode("inventor_name").InnerText;
                 typeOfApp = xNode.SelectSingleNode("type_of_app").InnerText;
+                createdOn = Convert.ToDateTime(xNode.SelectSingleNode("created_on").InnerText);
 
-                UIDocket.Docket docket = new UIDocket.Docket(id, number, inventionName, inventorName, typeOfApp);
+                UIDocket.Docket docket = new UIDocket.Docket(id, number, inventionName, inventorName, typeOfApp, createdOn);
                 docketsForUser.Add(docket);
             }
 

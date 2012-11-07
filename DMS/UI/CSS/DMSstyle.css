@@ -1,7 +1,70 @@
 ﻿.rightpane
 {
-    background-color:#ffffff;
-    font-family:Sans-Serif;
-    outline-width:thin;
-    outline-color:Black;    
+    background-color: #ffffff;
+    font-family: Sans-Serif;
+    outline-width: thin;
+    outline-color: Black;
+}
+
+.DMS-Data-Main table
+{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.DMS-Data-Main body
+{
+    background-color: #CECEF6;
+}
+
+.DMS-Data-Main h1
+{
+    color: #000000;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 8px;
+}
+
+.DMS-Data-Main body, input, textarea, button
+{
+    color: #333333;
+    font-size: 100%;
+    line-height: 1.4em;
+}
+
+.DMS-Data-Display table
+{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-collapse: collapse;
+    font-family: "Lucida Sans Unicode" , "Lucida Grande" ,Sans-Serif;
+    font-size: 12px;
+    margin: 20px;
+    text-align: left;
+    width: 480px;
+}
+.DMS-Data-Display th
+{
+    border-bottom: 2px solid #6678B1;
+    color: #003399;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 8px;
+}
+
+.DMS-Data-Display td
+{
+    border-bottom: 1px solid #CCCCCC;
+    color: #666699;
+    padding: 6px 8px;
+}
+
+.DMS-Data-Display html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, aside, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video
+{
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
 }
