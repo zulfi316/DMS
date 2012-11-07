@@ -17,22 +17,21 @@ namespace UI.ActionFactory.Actions
         public string Execute()
         {
             UIDocket.Docket newDocket = new UIDocket.Docket(Int32.MinValue,
-                                                            String.Empty, arguments["inventionName"],
+                                                            String.Empty, 
+                                                            arguments["inventionName"],
                                                             arguments["inventorName"],
                                                             arguments["appType"],
                                                             DateTime.MinValue);
 
             string errorMessage;
-            return JSONifyOutput(newDocket.Save(out errorMessage), errorMessage, newDocket.Number);
+
+            Dictionary<string, string> jsonParameters = new Dictionary<string, string>();
+
+            jsonParameters.Add("docketId", newDocket.Number);
+
+            return Utilites.UtilityFunctions.JSONifyOutput(newDocket.Save(out errorMessage), errorMessage, jsonParameters);
         }
 
-        private string JSONifyOutput(bool success, string errorText, string docketNumber)
-        {
-            return           "{ " +
-                                "\"success\": \"" + success.ToString() + "\", " +
-                                "\"errorMessage\": \"" + errorText.Replace("'", "\\'") + "\", " +
-                                "\"docketNumber\": \"" + docketNumber + "\"" +
-                             " }";
-        }
+       
     }
 }

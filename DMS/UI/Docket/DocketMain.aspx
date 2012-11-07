@@ -2,6 +2,8 @@
 
 <img style="position: absolute; top: 10%; right: 15%; cursor: pointer" title="Add New Docket"
     alt="Add New Docket" onclick="dmsMain.docket.ShowDocketCreation()" src="/Images/AddDocket.jpg" />
+<img style="position: absolute; top: 10%; right: 13%; cursor: pointer" title="Delete Dockets"
+    alt="Delete Dockets" onclick="dmsMain.docket.SetDeleted()" src="/Images/Delete.png" />
 <%if (docketsForUser == null || docketsForUser.Count <= 0)
   { %>
 <div style="text-align: center">
@@ -15,6 +17,9 @@
 <div style="position: absolute; top: 10%; right: 20%">
     <table>
         <tr>
+            <th>
+                <input id="DMS-Docket-SelectAll" type="checkbox" onclick="dmsMain.SelectAllCheckboxes('DMS-Docket-Selector', this.checked)" />
+            </th>
             <th>
                 Number
             </th>
@@ -31,8 +36,11 @@
         <%
       foreach (UI.UIDocket.Docket docket in docketsForUser)
       {%>
-        <tr onclick="dmsMain.project.Init('<%=docket.Id%>')">
+        <tr>
             <td>
+                <input type="checkbox" class="DMS-Docket-Selector" id="<%=docket.Id%>" />
+            </td>
+            <td onclick="dmsMain.project.Init('<%=docket.Id%>')" style="cursor: pointer">
                 <%=docket.Number%>
             </td>
             <td>

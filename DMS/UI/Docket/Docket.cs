@@ -20,7 +20,23 @@ namespace UI.UIDocket
             {
                 return base.Save();
             }
-            catch(Exception e)
+            catch (Exception e)
+            {
+                errorText = e.Message + Environment.NewLine + e.StackTrace;
+                return false;
+            }
+        }
+
+        public bool SetDelete(bool deleted, out string errorText)
+        {
+
+            errorText = string.Empty;
+
+            try
+            {
+                return base.SetDelete(deleted);
+            }
+            catch (Exception e)
             {
                 errorText = e.Message + Environment.NewLine + e.StackTrace;
                 return false;

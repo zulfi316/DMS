@@ -17,5 +17,10 @@ namespace BusinessLayer.BLDocket
             //do the validation and the checks that need to be done here and call saveDocket function from base class
             return base.Save();
         }
+
+        protected bool SetDelete(bool deleted)
+        {
+            return base.SetDelete(deleted);
+        }
     }
 }

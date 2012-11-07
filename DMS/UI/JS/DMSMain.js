@@ -33,6 +33,14 @@
         alert(successText);
     };
 
+    DMSMain.prototype.SelectAllCheckboxes = function (className, selected) {
+        var elements = $('.' + className);
+
+        for (i = 0; i < elements.length; i++) {
+            elements[i].checked = selected;
+        }
+    }
+
     /*****************************DOCKET which takes care of all the UI action for Dockets***********************************/
     function Docket() {
 
@@ -140,6 +148,50 @@
 
             return success;
         };
+
+        Docket.prototype.SetDeleted = function () {
+
+            // Get checkboxes
+            var checkboxes = $('.DMS-Docket-Selector');
+
+            var docketIds = '';
+
+            for (i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    docketIds += checkboxes[i].id + '|';
+                }
+            }
+
+            // remove the last |
+            docketIds = docketIds.substr(0, docketIds.length - 1);
+
+            var data = {
+                actionKey: "DeactivateDocket",
+                reason: 'DELETE',
+                deleted: 'True',
+                docketIds: docketIds
+            };
+
+            $.ajax({
+                url: "/ActionFactory/Action.aspx",
+                metod: 'POST',
+                dataType: 'json',
+                data: data,
+                success: function (result) {
+
+                    if (result.success == "True") {
+                        dmsMain.HandleSuccess('Successfully deleted');
+                        dmsMain.docket.Init();
+                    } else {
+                        dmsMain.HandleError(result.errorMessage);
+                    }
+                },
+                error: function (result) {
+                    dmsMain.HandleError(result.errorMessage);
+                }
+            });
+
+        }
     };
     /**********************************************END OF DOCKET FUNCTION********************************************************************/
 

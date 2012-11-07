@@ -1,6 +1,6 @@
 USE [INOLYST]
 GO
-/****** Object:  Table [dbo].[Docket]    Script Date: 11/04/2012 17:27:09 ******/
+/****** Object:  Table [dbo].[Docket]    Script Date: 11/07/2012 21:46:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -14,6 +14,8 @@ CREATE TABLE [dbo].[Docket](
 	[type_of_app] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	[number] [varchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[created_on] [datetime] NOT NULL,
+	[deactivated] [bit] NULL,
+	[deactivation_reason] [char](15) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
  CONSTRAINT [PK_Docket] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -22,3 +24,10 @@ CREATE TABLE [dbo].[Docket](
 
 GO
 SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Docket]  WITH CHECK ADD  CONSTRAINT [CK_Docket] CHECK  (([deactivation_reason]='DELETED'))
+GO
+ALTER TABLE [dbo].[Docket] CHECK CONSTRAINT [CK_Docket]
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'Only allow a certain number of values for deactivation
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Docket', @level2type=N'CONSTRAINT',@level2name=N'CK_Docket'

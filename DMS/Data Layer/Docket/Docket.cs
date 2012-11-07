@@ -22,10 +22,10 @@ namespace DataLayer.DLDocket
         {
             this.Id = id;
             this.Number = number;
-            this.InventorName = inventorName;
+            this.InventorName = inventorId;
             this.TypeOfApp = typeOfApp;
             this.InventionName = inventionName;
-            this.CreatedOn = createdOn ;
+            this.CreatedOn = createdOn;
         }
 
         public String InventionName
@@ -89,14 +89,14 @@ namespace DataLayer.DLDocket
             }
         }
 
-        
+
 
         public DateTime CreatedOn
         {
-            
+
             set { this.createdOn = value; }
         }
-             
+
 
         protected bool Save()
         {
@@ -118,10 +118,10 @@ namespace DataLayer.DLDocket
                 command.Connection = connection;
 
                 command.Parameters.AddWithValue("@invention_name", dbManager.CheckNull(this.inventionName));
-                command.Parameters.AddWithValue("@inventor_name",  dbManager.CheckNull(this.inventorName));
-                command.Parameters.AddWithValue("@type_of_app",    dbManager.CheckNull(this.typeOfApp));
-                command.Parameters.AddWithValue("@number",         dbManager.CheckNull(this.number));
-                command.Parameters.AddWithValue("@created_on",     dbManager.CheckNull(this.createdOn));
+                command.Parameters.AddWithValue("@inventor_name", dbManager.CheckNull(this.inventorName));
+                command.Parameters.AddWithValue("@type_of_app", dbManager.CheckNull(this.typeOfApp));
+                command.Parameters.AddWithValue("@number", dbManager.CheckNull(this.number));
+                command.Parameters.AddWithValue("@created_on", dbManager.CheckNull(this.createdOn));
 
                 Int32 docketId = Convert.ToInt32(command.ExecuteScalar());
 
@@ -220,6 +220,34 @@ namespace DataLayer.DLDocket
         protected bool Update()
         {
             return false;
+        }
+
+
+        protected bool SetDelete(bool deleted)
+        {
+            dbManager = new DBConnection();
+            int deactivated = deleted ? 1 : 0;
+            string reason = "DELETED";
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = dbManager.Connection;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "[dbo].[set_docket_deactivation_status]";
+                cmd.Parameters.AddWithValue("@docket_id", dbManager.CheckNull(this.id));
+                cmd.Parameters.AddWithValue("@deactivated", dbManager.CheckNull(deactivated));
+                cmd.Parameters.AddWithValue("@reason", dbManager.CheckNull(reason));
+
+                cmd.ExecuteNonQuery();
+
+                return true;
+
+            }
+            finally
+            {
+                dbManager.Close();
+            }
         }
 
 

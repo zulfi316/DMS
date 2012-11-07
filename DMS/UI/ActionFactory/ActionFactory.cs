@@ -15,6 +15,7 @@ namespace UI.ActionFactory
             switch (actionKey)
             {
                 case "SaveDocket": return new SaveDocket(arguments);
+                case "DeactivateDocket": return new DeactivateDocket(arguments);
                 default:
                     return null;
             }

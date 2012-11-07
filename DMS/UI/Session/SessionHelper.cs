@@ -82,5 +82,21 @@ namespace UI.Session
             return true;
 
         }
+
+        public UIDocket.Docket GetDocketById(int id)
+        {
+            foreach (UIDocket.Docket docket in sessionData.Dockets)
+            {
+                if (docket.Id == id)
+                    return docket;
+            }
+
+            return null;
+        }
+
+        public UIDocket.Docket GetDocketById(string id)
+        {
+            return GetDocketById(Int32.Parse(id)); 
+        }
     }
 }
