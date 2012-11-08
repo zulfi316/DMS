@@ -44,21 +44,23 @@ namespace UI.Session
         public bool InitSession(UIUser.User userInfo)
         {
             //Check if data from last run still exists, if it does we remove it, it is now invalid
-            if (sessionInfo.ContainsKey(userInfo.Id))
-                sessionInfo.Remove(userInfo.Id);
+
+            string id = userInfo.Id.ToString();
+            if (sessionInfo.ContainsKey(id))
+                sessionInfo.Remove(id);
 
             SessionData data = new SessionData();
             data.UserInfo = userInfo;
 
-            HttpContext.Current.Session.Add(SESSION_ID_TOKEN, userInfo.Id);
-            sessionInfo.Add(userInfo.Id, data);
+            HttpContext.Current.Session.Add(SESSION_ID_TOKEN, id);
+            sessionInfo.Add(id, data);
 
             return true;
         }
 
         public string GetUserId()
         {
-            return sessionData.UserInfo.Id;
+            return sessionData.UserInfo.Id.ToString();
         }
 
         public UIDocket.Docket[] GetDockets()

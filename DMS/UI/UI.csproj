@@ -56,6 +56,7 @@
     <Content Include="Project\ProjectMain.aspx" />
     <Content Include="JS\DMSMain.js" />
     <Content Include="SignIn.aspx" />
+    <Content Include="tempadduser.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -116,6 +117,13 @@
       <DependentUpon>SignIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tempadduser.aspx.cs">
+      <DependentUpon>tempadduser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tempadduser.aspx.designer.cs">
+      <DependentUpon>tempadduser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\User.cs" />
     <Compile Include="Utilites\UtilityFunctions.cs" />
   </ItemGroup>

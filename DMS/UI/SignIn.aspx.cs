@@ -17,12 +17,9 @@ namespace UI
             if (String.IsNullOrEmpty(userName) || String.IsNullOrEmpty(password))
                 return;
 
-            string[] userInfo = BLUserHelper.Instance.GetUserInfoByUserName(userName, password);
+            UIUser.User user = new UIUser.User(userName, password);
 
-            if (userInfo == null)
-                return;
-
-            UIUser.User user = new UIUser.User(userInfo[0], userInfo[1]);
+            user.ValidateCredentials();
 
             SessionHelper.Instance.InitSession(user);
 
