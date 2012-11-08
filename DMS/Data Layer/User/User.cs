@@ -44,7 +44,7 @@ namespace DataLayer.DLUser
             SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
 
             // First we encrypt the currently entered UID and password
-            byte[] password = sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(this.name + this.password));
+            byte[] password = sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(this.password));
 
             // Then we get the password for this user from the DB
             // For this we are in a dilemma, did the user enter his login name or his employee id?
@@ -133,7 +133,7 @@ namespace DataLayer.DLUser
         public static bool Save(string uid, string pass, string eid)
         {
             SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
-            byte[] p = sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(uid + pass));
+            byte[] p = sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(pass));
 
             DBConnection dbManager = new DBConnection();
 
