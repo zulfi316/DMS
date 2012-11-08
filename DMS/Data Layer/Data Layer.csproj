@@ -49,6 +49,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="User\Crypto\CryptoHelper.cs" />
     <Compile Include="User\UserHelper.cs" />
     <Compile Include="User\User.cs" />
   </ItemGroup>

@@ -29,11 +29,9 @@ namespace BusinessLayer.BLUser
             }
         }
 
-
-        public new string[] GetUserInfoByUserName(string userName, string password)
+        public bool Save(string userId, string password, string employeeId)
         {
-            //validate username, password
-            return base.GetUserInfoByUserName(userName);
+            return base.Save(userId, password, employeeId);
         }
     }
 }

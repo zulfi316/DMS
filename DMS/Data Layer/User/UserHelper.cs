@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using User.CryptoHelper;
+using DataLayer.connection;
+using System.Data.SqlClient;
 
 namespace DataLayer.DLUser
 {
@@ -12,16 +15,39 @@ namespace DataLayer.DLUser
 
         }
 
-        protected string[] GetUserInfoByUserName(string userName)
+        protected bool Save(string userName, string password, string employeeId)
         {
-            string[] userInfo = new string[2];
+            byte[] p = CryptoHelper.Instance.EncryptStringToBytes(password);
 
-            userInfo[0] = "1";
-            userInfo[1] = "Zulfi";
+            DBConnection dbManager = new DBConnection();
 
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "[dbo].[add_user]";
+                cmd.Parameters.AddWithValue("@login_name", dbManager.CheckNull(userName));
+                cmd.Parameters.AddWithValue("@password", dbManager.CheckNull(p));
+                cmd.Parameters.AddWithValue("@employee_id", dbManager.CheckNull(employeeId));
 
-            return userInfo;
+                cmd.Connection = dbManager.Connection;
+
+                cmd.ExecuteNonQuery();
+
+                return true;
+
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                dbManager.Close();
+            }
+
         }
+
 
     }
 }

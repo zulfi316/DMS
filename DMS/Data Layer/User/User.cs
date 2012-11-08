@@ -4,6 +4,7 @@ using System.Text;
 using System.Security.Cryptography;
 using DataLayer.connection;
 using System.Data.SqlClient;
+using User.CryptoHelper;
 
 namespace DataLayer.DLUser
 {
@@ -39,12 +40,10 @@ namespace DataLayer.DLUser
 
         protected bool ValidateCredentials()
         {
-            //We use SHA for encryption
-
-            SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
+            //We use AES for encryption
 
             // First we encrypt the currently entered UID and password
-            byte[] password = sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(this.password));
+            byte[] password = CryptoHelper.Instance.EncryptStringToBytes(this.password);
 
             // Then we get the password for this user from the DB
             // For this we are in a dilemma, did the user enter his login name or his employee id?
@@ -54,7 +53,7 @@ namespace DataLayer.DLUser
 
             try
             {
-                if (ComparePassword(password, existingPassword))
+                if (CryptoHelper.Instance.ComparePassword(password, existingPassword))
                     this.Initialize();
 
             }
@@ -103,65 +102,6 @@ namespace DataLayer.DLUser
             {
                 dbManager.Close();
             }
-        }
-
-        private bool ComparePassword(byte[] password, byte[] existingPassword)
-        {
-            bool result = false;
-
-            if (password != null && existingPassword != null)
-            {
-                if (password.Length == existingPassword.Length)
-                {
-                    result = true;
-                    for (int i = 0; i < password.Length; i++)
-                    {
-                        if (password[i] != existingPassword[i])
-                        {
-                            result = false;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return result;
-        }
-
-
-        // DO NOT USE THIS METHOD!
-        public static bool Save(string uid, string pass, string eid)
-        {
-            SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
-            byte[] p = sha.ComputeHash(System.Text.Encoding.ASCII.GetBytes(pass));
-
-            DBConnection dbManager = new DBConnection();
-
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "[dbo].[add_user]";
-                cmd.Parameters.AddWithValue("@login_name", dbManager.CheckNull(uid));
-                cmd.Parameters.AddWithValue("@password", dbManager.CheckNull(p));
-                cmd.Parameters.AddWithValue("@employee_id", dbManager.CheckNull(eid));
-
-                cmd.Connection = dbManager.Connection;
-
-                cmd.ExecuteNonQuery();
-
-                return true;
-
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                dbManager.Close();
-            }
-
         }
 
         private byte[] GetExistingPassword()

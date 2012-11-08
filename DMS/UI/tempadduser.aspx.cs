@@ -20,7 +20,7 @@ namespace UI
             if (string.IsNullOrEmpty(uid) || string.IsNullOrEmpty(pwd))
                 return;
 
-            DataLayer.DLUser.User.Save(uid, pwd, empId);
+            BusinessLayer.BLUser.BLUserHelper.Instance.Save(uid, pwd, empId);
 
         }
     }
