@@ -110,9 +110,8 @@
                     dataType: 'json',
                     data: data,
                     success: function (result) {
-
                         if (result.success == "True") {
-                            dmsMain.HandleSuccess('Successfully made new docket with the id: ' + result.docketNumber);
+                            dmsMain.HandleSuccess('Successfully made new docket with the id: ' + result.docketId);
                             $('#DMS-popup').dialog("close");
                             dmsMain.docket.Init();
                         } else {

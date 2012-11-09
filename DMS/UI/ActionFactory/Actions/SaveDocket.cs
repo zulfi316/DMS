@@ -27,9 +27,10 @@ namespace UI.ActionFactory.Actions
 
             Dictionary<string, string> jsonParameters = new Dictionary<string, string>();
 
+            bool success = newDocket.Save(out errorMessage);
             jsonParameters.Add("docketId", newDocket.Number);
 
-            return Utilites.UtilityFunctions.JSONifyOutput(newDocket.Save(out errorMessage), errorMessage, jsonParameters);
+            return Utilites.UtilityFunctions.JSONifyOutput(success, errorMessage, jsonParameters);
         }
 
        

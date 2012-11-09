@@ -17,7 +17,12 @@ namespace UI.Session
         {
             get
             {
-                return sessionInfo[(string)HttpContext.Current.Session[SESSION_ID_TOKEN]];
+                object sessionIdToken = HttpContext.Current.Session[SESSION_ID_TOKEN];
+                
+                if (sessionIdToken == null)
+                    HttpContext.Current.Server.Transfer("/SignIn.aspx", false);
+
+                return sessionInfo[(string)sessionIdToken];
             }
         }
 
