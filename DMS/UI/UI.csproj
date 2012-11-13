@@ -53,6 +53,7 @@
     <Content Include="JS\jquery-ui-1.9.1.custom.js" />
     <Content Include="JS\jquery-ui-1.9.1.custom.min.js" />
     <Content Include="Main.aspx" />
+    <Content Include="Project\CreateNewProject.aspx" />
     <Content Include="Project\ProjectMain.aspx" />
     <Content Include="JS\DMSMain.js" />
     <Content Include="SignIn.aspx" />
@@ -76,7 +77,9 @@
     <Compile Include="ActionFactory\ActionFactory.cs" />
     <Compile Include="ActionFactory\Actions\DeactivateDocket.cs" />
     <Compile Include="ActionFactory\Actions\SaveDocket.cs" />
+    <Compile Include="ActionFactory\Actions\SaveProject.cs" />
     <Compile Include="ActionFactory\IAction.cs" />
+    <Compile Include="Country\Country.cs" />
     <Compile Include="Docket\CreateNew.aspx.cs">
       <DependentUpon>CreateNew.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -98,6 +101,13 @@
     </Compile>
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Project\CreateNewProject.aspx.cs">
+      <DependentUpon>CreateNewProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Project\CreateNewProject.aspx.designer.cs">
+      <DependentUpon>CreateNewProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project\Project.cs" />
     <Compile Include="Project\ProjectMain.aspx.cs">

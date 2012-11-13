@@ -36,6 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Country\Country.cs" />
+    <Compile Include="Country\countryHelper.cs" />
     <Compile Include="Project\ProjectHelper.cs" />
     <Compile Include="Project\Project.cs" />
     <Compile Include="User\User.cs" />

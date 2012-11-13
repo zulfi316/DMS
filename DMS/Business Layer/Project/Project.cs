@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace BusinessLayer.BLProject
 {
     public class Project : DataLayer.DLProject.Project
     {
-        protected Project(BLDocket.Docket docket, string type, string id, string fileNumber, string draftor, string invoiceNumber)
-            : base(docket, type, id, fileNumber, draftor, invoiceNumber)
+        protected Project(int id,BLDocket.Docket docket, string type, string number, string draftor, string invoiceNumber,string countryId)
+            : base(id,docket, type, number, draftor, invoiceNumber,countryId)
         {
             
         }
 
-        protected bool save()
+        protected bool Save()
         {
-            return false;
+            return base.save();
         }
+
+       
 
     }
 }

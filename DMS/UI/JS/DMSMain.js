@@ -91,7 +91,7 @@
                 }
             );
 
-        };
+        }; //end Docket.prototype.ShowDocketCreation
 
         Docket.prototype.Save = function () {
 
@@ -123,7 +123,7 @@
                     }
                 });
             }
-        };
+        }; //end Docket.prototype.Save
 
         Docket.prototype.Validate = function () {
 
@@ -146,7 +146,7 @@
             }
 
             return success;
-        };
+        };//end of Docket.prototype.Validate
 
         Docket.prototype.SetDeleted = function () {
 
@@ -213,9 +213,78 @@
                     dmsMain.HandleError("Failed to get projects!");
                 }
             });
-        }
+        }; //end of Project.prototype.Init
+
+        Project.prototype.ShowProjectCreation = function () {
+
+            var popupContainer = $('#DMS-popup');
 
 
+            popupContainer.dialog({
+                autoOpen: false,
+                buttons:
+                        {
+                            Create: function () {
+                                dmsMain.project.Save();
+                            },
+                            Close: function ()
+                            { $(this).dialog("close"); }
+                        },
+                modal: true,
+                width: 550,
+                height: 300,
+                title: 'Create Project'
+            });
+
+            popupContainer.load(
+                '/Project/CreateNewProject.aspx',
+                {},
+                function (responseText, textStatus, XMLHttpRequest) {
+
+                    var array = ['DMS-Project-Country', 'DMS-Project-DrafterName', 'DMS-Project-ProjType', 'DMS-Project-Bill'];
+
+                    for (i = 0; i < array.length; i++)
+                        $('#' + array[i]).tooltip({ disabled: true });
+
+                    popupContainer.dialog("open");
+                }
+            );
+
+            }; //end of Project.prototype.ShowProjectCreation
+
+            Project.prototype.Save = function () {
+
+                //if (this.Validate()) {
+
+                var data = {
+                    actionKey: "SaveProject",
+                    country: $("#DMS-Project-Country").val(),
+                    drafter: $("#DMS-Project-DrafterName").val(),
+                    typeofProject: $("#DMS-Project-ProjType").val(),
+                    billing: $("#DMS-Project-Bill").val()
+                };
+
+                $.ajax({
+                    url: "/ActionFactory/Action.aspx",
+                    metod: 'POST',
+                    dataType: 'json',
+                    data: data,
+                    success: function (result) {
+                        
+                        if (result.success == "True") {
+                            dmsMain.HandleSuccess('Successfully made new project with the id: ' + result.projectNumber);
+                            $('#DMS-popup').dialog("close");
+                            dmsMain.project.Init(result.docketId);
+                        } else {
+                            dmsMain.HandleError(result.errorMessage);
+                        }
+                    },
+                    error: function (result) {
+                        dmsMain.HandleError(result.errorMessage);
+                    }
+                });
+                //}validate function
+            };  //end Project.prototype.Save
     }
 
 }

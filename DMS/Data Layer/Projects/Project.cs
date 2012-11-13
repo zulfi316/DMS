@@ -12,25 +12,25 @@ namespace DataLayer.DLProject
 
         private DLDocket.Docket docket;
         private string type;
-        private string id;
-        private string fileNumber;
+        private string number;
         private string draftor;
         private string invoiceNumber;
+        private int id;
+        private string countryId;
 
         private DBConnection dbManager;
 
-        protected Project(DLDocket.Docket docket, string type, string id, string fileNumber, string draftor, string invoiceNumber)
+        protected Project(int id,DLDocket.Docket docket, string type, string number, string draftor, string invoiceNumber,string countryId)
         {
             this.Docket=docket;
             this.Type=type;
-            this.Id=id;
-            this.FileNumber=fileNumber;
+            this.Number=number;
             this.Draftor=draftor;
             this.InvoiceNumber=invoiceNumber;
-
+            this.CountryId = countryId;
         }
 
-        protected DLDocket.Docket Docket
+        public DLDocket.Docket Docket
         {
             get
             {
@@ -42,7 +42,7 @@ namespace DataLayer.DLProject
             }
         }
 
-        protected string Type
+        public string Type
         {
             get
             {
@@ -54,32 +54,19 @@ namespace DataLayer.DLProject
             }
         }
 
-        protected string Id
+        public string Number
         {
             get
             {
-                return this.id;
+                return this.number;
             }
             set
             {
-                this.id = value;
+                this.number = value;
             }
         }
 
-        protected string FileNumber
-        {
-            get
-            {
-                return this.fileNumber;
-            }
-            set 
-            {
-                this.fileNumber = value;
-            }
-
-        }
-
-        protected string Draftor
+        public string Draftor
         {
             get
             {
@@ -91,7 +78,7 @@ namespace DataLayer.DLProject
             }
         }
 
-        protected string InvoiceNumber
+        public string InvoiceNumber
         {
             get
             {
@@ -103,21 +90,26 @@ namespace DataLayer.DLProject
             }
         }
 
+      
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
+
+        
+
+        public string CountryId
+        {           
+            get { return this.countryId; }
+            set { this.countryId = value; }
+        }
+        
 
         protected bool save()
         {
             try
             {
-                dbManager = new DBConnection();
-                SqlConnection connection = dbManager.Connection;
-                SqlCommand command = new SqlCommand();
-
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                command.CommandText = "";
-                command.Connection = connection;
-
-                
 
                 return true;
             }

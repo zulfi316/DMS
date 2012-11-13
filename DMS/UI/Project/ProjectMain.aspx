@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProjectMain.aspx.cs" Inherits="UI.Project.ProjectMain" %>
 
-<button class="ui-button" style="float:right">Create new docket!</button>
+<button class="DMS-button" onclick="dmsMain.project.ShowProjectCreation()"  style="float:right">Create new docket!</button>
 <div style=" position:absolute; top:10%; right:20%">
     <table border="1">
         <tr>

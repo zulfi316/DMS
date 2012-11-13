@@ -16,6 +16,7 @@ namespace UI.ActionFactory
             {
                 case "SaveDocket": return new SaveDocket(arguments);
                 case "DeactivateDocket": return new DeactivateDocket(arguments);
+                case "SaveProject": return new SaveProject(arguments);
                 default:
                     return null;
             }

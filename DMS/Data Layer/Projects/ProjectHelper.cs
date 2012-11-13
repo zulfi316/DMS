@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Data.SqlClient;
+using DataLayer.connection;
+using System.Data;
+using System.Xml;
 namespace DataLayer.DLProject
 {
     public class DLProjectHelper
     {
-
+        DBConnection dbManager;
         protected DLProjectHelper()
         {
 
@@ -41,5 +44,6 @@ namespace DataLayer.DLProject
             return projectInfo;
         }
 
+        
     }
 }
